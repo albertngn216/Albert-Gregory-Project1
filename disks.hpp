@@ -169,21 +169,21 @@ sorted_disks sort_alternate(const disk_state& before) {
 	int numOfSwap = 0;                                                                      //record # of step swap
 
   disk_state state = before;
-    for(int i = 0; i < state.total_count() + 1; i++){
-      if(i % 2 == 0){
-          for(int index = 0; index < state.total_count() - 1; index = index + 2){
-              if(state.get(index) != state.get(index +1)){
-                  if(state.get(index) == DISK_DARK && state.get(index + 1) == DISK_LIGHT){
+    for (int i = 0; i < state.total_count() + 1; i++) {
+      if (i % 2 == 0){ // checking even indices
+          for (int index = 0; index < state.total_count() - 1; index = index + 2) {
+              if (state.get(index) != state.get(index +1)) { // only swapping if necessary
+                  if (state.get(index) == DISK_DARK && state.get(index + 1) == DISK_LIGHT){
                       state.swap(index);
                       numOfSwap++;
                   }
               }
           }
       }
-      else{
-        for(int index = 1; index < state.total_count() - 2; index = index + 2){
-            if (state.get(index) != state.get(index + 1)){
-                if(state.get(index) == DISK_DARK && state.get(index+1) == DISK_LIGHT){
+      else { // checking odd indices
+        for (int index = 1; index < state.total_count() - 2; index = index + 2) {
+            if (state.get(index) != state.get(index + 1)) { // only swapping if necessary
+                if (state.get(index) == DISK_DARK && state.get(index+1) == DISK_LIGHT) {
                     state.swap(index);
                     numOfSwap++;
                 }
@@ -205,11 +205,11 @@ sorted_disks sort_lawnmower(const disk_state& before) {
   //initialize counter
   int numOfSwap = 0;
 
-  for(int i = 0; i < state.total_count() / 2; i++) { //iterate left to right
+  for (int i = 0; i < state.total_count() / 2; i++) { //iterate left to right
     int index = 0;
     while (index + 1 < state.total_count()) {  //sentinal to not go past n/2
-      if(state.get(index) != state.get(index + 1)) {  //comparing two disks next to each other
-        if(state.get(index) == DISK_DARK && state.get(index + 1) == DISK_LIGHT) { //if a dark disk is to the left of a light 
+      if (state.get(index) != state.get(index + 1)) {  //comparing two disks next to each other
+        if (state.get(index) == DISK_DARK && state.get(index + 1) == DISK_LIGHT) { //if a dark disk is to the left of a light 
           //swap disks and increment swap counter
           state.swap(index);
           numOfSwap++;
@@ -219,8 +219,8 @@ sorted_disks sort_lawnmower(const disk_state& before) {
       index++;
     }
     while (index > 0) {
-      if(state.get(index-1) != state.get(index)) {
-        if(state.get(index-1) == DISK_DARK && state.get(index) == DISK_LIGHT) {
+      if (state.get(index-1) != state.get(index)) {
+        if (state.get(index-1) == DISK_DARK && state.get(index) == DISK_LIGHT) {
           state.swap(index - 1);
           numOfSwap++;
         }
